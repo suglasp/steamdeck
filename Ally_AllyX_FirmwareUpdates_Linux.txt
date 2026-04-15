@@ -1,0 +1,173 @@
+
+If you are using the Ally/Ally X handheld with Linux (Bazzite or SteamOS),
+you are out of luck to patch for device firmware updates.
+
+There is a way to do it, but it's a long procedure.
+It can be done without swapping the internal NVME or reinstalling the device to ASUS Windows image.
+----------------------------------------------------------------------------------------------------------
+
+Note : The procedure will work for Legion Go devices.
+       You will need to download the drivers and tools from the Lenovo website, instead of Asus (Duh!)
+
+Note : We will refer in this guide to "Ally/Ally X", meaning any of the available Asus ROG Ally handheld series.
+
+
+
+Before we start, we need a few items at hand:
+- Ally/Ally X handheld + 65w poweradapter for our handheld.
+- Windows machine, for prepping a boot USB stick (we call it the 'Windows Prep Machine')
+- USB stick of 128Gb or larger (you can also use an external NVME USB drive, will be much faster to boot the Ally/Ally X!)
+  Ideal : Make use of a USB stick with a visible LED light, so you can see it's reading/writing.
+- If the USB stick is USB3 (USB connector Type-A), you will need a convertor/adapter from "USB-A female -> USB-C male" to plug into the Ally/Ally X.
+- Keyboard with USB-C connection
+
+
+A bit of Terminoligy:
+- Reboot : restart the device
+- Boot : while it's starting (the ASUS logo appears)
+- BIOS : Basic Input/Output System. It's mini software every computer has, that initilizes the machine while it starts.
+- MCU : Microcontroller Unit. It's an on-board Chip next to the BIOS and CPU/GPU that speficly monitors performance, RGB lights, talks with PD, Gyroscope, etc...
+- PD : Power Delivery unit.
+- Firmware : Tiny software that controls hardware. Things like the BIOS, MCU, PD, Touch screen hold a firmware in the Ally/Ally X.
+             The OS (Windows/Linux) can talk with the firmware(s), to know things about the hardware status or give it instructions.
+
+
+On the Windows Prep machine:
+1) Download 7-Zip x86-64 from https://www.7-zip.org/download.html
+   Install 7-zip on your pc.
+   
+2) Download Rufus portable https://rufus.ie/, it has the name rufus-x.xxp.exe (where x.xx = version)
+
+3) Download Windows 11 ISO image from https://www.microsoft.com/en-us/software-download/windows11
+   Get the iso file from "Download Windows 11 Disk Image (ISO) for x64 devices".
+   Select the English International ISO.
+
+4) Surf to https://www.asus.com/support/download-center/
+   Search for model > type in correct model number
+   - RC71L (Xbox Ally 2023)
+   - RC72LA (Ally X 2024)
+   - RC73YYA (Xbox Ally 2025)
+   - RC73XA (Xbox Ally X 2025)
+
+   On the right side of the 'model selection' box, will show up a thumbprint of the device and some links.
+   Click on the link "Driver & Tools".
+
+   A new brower-tab will open next to the download page "Driver & Tools".
+   Now, download all latest packages for "Drivers & Tools" AND ALSO "BIOS & FIRMWARE".
+   If the Operation System (OS) is requested, select "Windows 11 64-bit".
+   
+   Under your download folder, make a subfolder named "ASUS".
+   Move or drag and drop (Windows Explorer) all downloaded packages to the "ASUS" folder.
+   Copy/Paste the directory path from Windows Explorer of ASUS folder.
+   
+   Note :: For the BIOS, ASUS provides 2 types of packages for the System BIOS that do the same thing.
+           Asus provides a Windows installer package, and a ASUS EZ Package. See step 12)
+   
+5) Unpack all Asus packages :: double click (execute) each package (*).
+   Instead of selecting "install"; select "extract" and past the path you copied from step 4)
+
+   Move each package nicely in 2 folders "firmware" and "drivers" (you will get ASUS\firmware and ASUS\drivers).
+   Underneat 'drivers', create for each package a simple name schema like "Audio", "Graphics", "Wifi", "Chipset", ... etc.
+   Underneat 'firmware', create for each of the 4 packages a simple name schema for "MCU", "BIOS", "PD" and "Touchscreen".
+   
+   Copy also the original install for the MCU package. This is a special one.
+   
+   (*) Some packages can be extracted with 7-Zip. Most can be extracted by executing them.
+       If you extract them, make sure you see *.cat/*.inf/.... decent files not rubbish files.
+	   Mostly, the firmware packages can be extracted with 7-Zip.
+
+6) Surf to https://armoury-crate.com/, and download the Armoury Crate SE installer.
+   Place it under the ASUS folder. You will need this on the Ally/Ally X machine!
+
+7) Start Rufus.
+   Select as ISO file the windows 11 iso image (make sure it's fully downloaded!).
+   Click open the Installation Option, and select "Windows on the Go".
+   Burn the ISO to the USB drive you just plugged into your Windows prep machine.
+   Wait until the USB stick is finished.
+   Close Rufus.
+   
+   Note :: The 'Windows to Go' installation on our USB stick, will not be activated with a key.
+   If you boot it from the USB drive, Windows will be in a grace period for 90 days.
+   It's okay. We just need it to patch our firmware of the handheld device.
+   Next time you need to go through all this, you will have to restart from step 1).
+   
+8) In Windows Explorer, you will see the USB stick as a drive.
+   Copy the ASUS folder we prepped, to the USB stick.
+   You will see many folders and files under neat it and already in place, do not touch these.
+   It's the 'Windows on the Go' installation you see there, ready to boot on the Ally handheld.
+
+
+-- From here, we normally don't need our Windows Prep Workstation anymore.
+-- Everything from here on, happens now on the Ally/Ally X handheld.
+
+
+On the Ally/Ally X handheld:
+9) Power down the Ally/Ally X handheld.
+   Make sure it's 60% or more charged.
+   Plugin the USB stick (using adapter if needed).
+   Note :: DO NOT REMOVE THE USB STICK, UNLESS THE ALLY/ALLY X IS POWER OFF! USE THE 2ND USB PORT ON THE ALLY FOR FURTHER ACTIONS.
+   Boot the Ally/Ally X, and press several times 'Volume-'.
+   You will enter the BIOS of the Ally/Ally X.
+   Press the Armoury crate button, that shows a boot selection screen. Select the USB Stick. (**)
+   
+   (**) If you don't see the USB stick, make sure it's plugged in correctly and retry step 9)
+
+10) If all works well, Windows should be booting now from the USB Stick!
+    Any change you make, will be written to the USB stick. If you reboot the Windows installation, it will remember all changes!
+	Windows 11 25H2 or higher, auto recognizes the Touch screen for basic operations.
+	Windows will the first time ask for Wifi. Click "Driver" > browse to the ASUS folder > 'drivers' > 'Wifi' and select the WLAN folder.
+    Click next and finish the wizard. If possible, connect to Wifi so it can Update drivers for the Ally/Ally X.
+	
+	Once Windows is booted to the desktop, do 2 things:
+	- Press the background of Windows > Display Settings > Set scaling to 125%.
+	- Next, Open Explorer > Go to the ASUS folder on the USB stick (C:\ASUS).
+	  Drill down to the 'drivers' folder. Open each package (Wifi, Chipset, ...). Long press the *.inf files > "Install...".
+	  If Windows asks to reboot, ignore it!
+	- Install the Firmware items that have a *.inf file (PD and Touch). If asked for reboot, ignore for now!
+	  Skip for now the System BIOS package.
+	- Last, install Armoury Crate SE.
+	
+	Now you can reboot. Once it reboots, follow step 9) and go to step 11)
+	It's possible the BIOS will start updating firmwares for PD and Touch screen.
+	Connect a power adapter during this process! If it complains the power adapter is not seen, re-seat the USB-C power adapter cable.
+	If the MCU is updated, it can reset the USB-C ports and lose powerdraw from the power adapter.
+	
+	If during a reboot; the Ally/Ally X sits waiting on a black screen + Fan's spinning + USB stick is not flashing anymore (no reads/writes),
+    you can power it off by long pressing the power button.
+	
+11) If Windows asks to reset password, connect the USB-C keyboard and reset password (Disconnect power adapter if needed. Keep the USB Stick connected on the Ally/Ally X!).
+    Click Windows start menu > Settings > Windows Update. Let it patch Windows. If a reboot is needed, repeat!
+	Windows Update process, will also patch the firmware for the AMD Chipset and optionally the CPU Microcode!
+	
+	Browse to the Asus\firmware\MCU folder and launch the installer package. It will patch the MCU firmware.
+	
+	Open Armoury Crate SE (Press Armoury Crate button) > Update > Let everything patch from within Armoury Crate.
+    If done, reboot again the Ally/Ally X.
+    After this :: Poweroff. Unplug the USB Stick.
+    Boot into Bazzite/SteamOS like you used to do.
+	
+12) This step is optional, and is more for the "Advanced" users.
+
+    Warning :: This step can brick your handheld f done wrongly!
+               Armoury Crate can patch the BIOS for you.
+			   
+    To patch the BIOS "offline" using ASUS EZ, plugin the USB stick in the Windows Prep Machine.
+	Format it with FAT32 filesystem (NOT NTFS!).
+	Unpack the BIOS *.ZIP File from the ASUS download page (see step 4), and copy the unpacked BIOS *.BIN file to the USB Stick.
+	On the Ally/Ally X, plugin the Power adapter so it has powerdraw.
+	Plug USB stick back into the Ally/Ally X, boot it while pressing several times 'Volume-' to go into the BIOS.
+	Press "Y", and select the Asus EZ Firmware update.
+	Browse to the USB Stick in the explorer screen. And click the *.BIN firmware file.
+	It will ask to install the BIOS update, confirm.
+	It will reboot and start flashing the firmware to the BIOS.
+	Once done, it will reboot again and boot off the internal drive.
+	Remove the USB Stick, and done!
+	
+
+
+
+
+----------------------------------------------------------------------------------------------------------
+
+Source  : www.github.com/suglasp
+Updated : 15/04/2026
