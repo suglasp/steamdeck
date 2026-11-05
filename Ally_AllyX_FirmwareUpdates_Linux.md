@@ -6,7 +6,6 @@ you are out of luck to patch for device firmware updates.
 
 There is a way to do it, but it's a long procedure.
 It can be done without swapping the internal NVME or reinstalling the device to ASUS Windows image.
-----------------------------------------------------------------------------------------------------------
 
 **Note** : The procedure will work for Legion Go devices.
        You will need to download the drivers and tools from the Lenovo website, instead of Asus website.
