@@ -1,5 +1,5 @@
 
-If you are using the Ally/Ally X handheld with Linux (Bazzite or SteamOS),
+If you are using the Ally/Ally X handheld with Linux (Bazzite, CachyOS or SteamOS),
 you are out of luck to patch for device firmware updates.
 
 There is a way to do it, but it's a long procedure.
@@ -157,23 +157,36 @@ On the Ally/Ally X handheld:
 	
 13) This step is optional, and is more for the "Advanced" users.
 
-    Warning :: This step can brick your handheld f done wrongly!
-               Armoury Crate can patch the BIOS for you.
+    Warning :: This step can brick your handheld if done wrongly!
+               Armoury Crate SE can patch the BIOS for you.
 			   
     To patch the BIOS "offline" using ASUS EZ, plugin the USB stick in the Windows Prep Machine.
-	Format it with FAT32 filesystem (NOT NTFS!).
-	Unpack the BIOS *.ZIP File from the ASUS download page (see step 4), and copy the unpacked BIOS *.BIN file to the USB Stick.
-	On the Ally/Ally X, plugin the Power adapter so it has powerdraw.
-	Plug USB stick back into the Ally/Ally X, boot it while pressing several times 'Volume-' to go into the BIOS.
-	Press "Y", and select the Asus EZ Firmware update.
-	Browse to the USB Stick in the explorer screen. And click the *.BIN firmware file.
-	It will ask to install the BIOS update, confirm.
-	It will reboot and start flashing the firmware to the BIOS.
-	Once done, it will reboot again and boot off the internal drive.
-	Remove the USB Stick, and done!
+	a) Format USB stick with FAT32 filesystem (NOT NTFS!).
+           If you can't select FAT32; use diskpart on the Windows Prep machine to create a USB drive partition of 32Gb.
+           Run cmd Elevated > diskpart > list disk > sel disk ´x´ > clean > create part prim size=32000 > format fs=fat32 quick  (**)
+           (**) ´x´ is the disk number of the USB drive. If you are unsure, abort the procedure here!
+	b) Unpack the BIOS *.ZIP File from the ASUS download page (see step 4), and copy the unpacked BIOS *.BIN file to the USB Stick's root.
+	c) On the Ally/Ally X, plugin the Power adapter so it has powerdraw.
+	d) Plug USB stick back into the Ally/Ally X
+        e) Boot the Ally/Ally X while pressing several times 'Volume-' to go into the BIOS.
+        f) Press "Y", go to Security > Secure Boot > Disable
+        g) Reboot to apply BIOS setting, repeat e)
+	h) Again in the BIOS, Press "Y", and select the Asus EZ Firmware update.
+	i) Browse to the USB Stick in the explorer screen. And click the binary firmware file.
+	j) It will ask to install the BIOS update, confirm.
+	k) It will reboot and start flashing the firmware to the BIOS.
+	l) Once done, it will reboot again and boot off the internal drive.
+	m) Remove the USB Stick
+        n) Switch to desktop mode, open a prompt and type ´sudo -i´
+        o) type in - ONE OF THE FOLLOWING TWO - lines (chose one):
+           $ ujust enroll-secure-boot-key                              # Bazzite (Fedora flavor)
+           $ mokutil --import /etc/pki/akmods/certs/akmods-ublue.der   # Bazzite, SteamOS, CachyOS
+        p) $ systectl reboot
+        n) When the Ally reboots, execute step e) to switch to BIOS
+        o) Press "Y", go to Security > Secure Boot > Enable
+        p) Reboot to apply BIOS setting
+        q) blue MOK util will start, Enroll MOK > Continue > Yes > enter "universalblue" as password (QWERTY!) > Reboot
 	
-
-
 
 
 ----------------------------------------------------------------------------------------------------------
