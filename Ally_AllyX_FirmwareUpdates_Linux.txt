@@ -7,7 +7,7 @@ It can be done without swapping the internal NVME or reinstalling the device to 
 ----------------------------------------------------------------------------------------------------------
 
 Note : The procedure will work for Legion Go devices.
-       You will need to download the drivers and tools from the Lenovo website, instead of Asus (Duh!)
+       You will need to download the drivers and tools from the Lenovo website, instead of Asus website.
 
 Note : We will refer in this guide to "Ally/Ally X", meaning any of the available Asus ROG Ally handheld series.
 
@@ -44,11 +44,13 @@ On the Windows Prep machine:
 
 4) Surf to https://www.asus.com/support/download-center/
    Search for model > type in correct model number
-   - RC71L (Xbox Ally 2023)
-   - RC72LA (Ally X 2024)
-   - RC73YYA (Xbox Ally 2025)
-   - RC73XA (Xbox Ally X 2025)
+   - RC71L   (ROG Ally 2023)
+   - RC72LA  (ROG Ally X 2024)
+   - RC73YYA (ROG Xbox Ally 2025)
+   - RC73XA  (ROG Xbox Ally X 2025)
+   - RC74XA  (ROG Xbox Ally X20 2026 - standalone/bundle)
 
+   
    On the right side of the 'model selection' box, will show up a thumbprint of the device and some links.
    Click on the link "Driver & Tools".
 
@@ -63,7 +65,7 @@ On the Windows Prep machine:
    Note :: For the BIOS, ASUS provides 2 types of packages for the System BIOS that do the same thing.
            Asus provides a Windows installer package, and a ASUS EZ Package. See step 12)
    
-5) Unpack all Asus packages :: double click (execute) each package (*).
+5) Unpack all Asus packages :: double click (execute) each package (**).
    Instead of selecting "install"; select "extract" and past the path you copied from step 4)
 
    Move each package nicely in 2 folders "firmware" and "drivers" (you will get ASUS\firmware and ASUS\drivers).
@@ -72,9 +74,9 @@ On the Windows Prep machine:
    
    Copy also the original install for the MCU package. This is a special one.
    
-   (*) Some packages can be extracted with 7-Zip. Most can be extracted by executing them.
-       If you extract them, make sure you see *.cat/*.inf/.... decent files not rubbish files.
-	   Mostly, the firmware packages can be extracted with 7-Zip.
+   (**) Some packages can be extracted with 7-Zip. Most can be extracted by executing them.
+       If you extract them, make sure you see *.cat/*.inf/.... decent files, not ´rubbish´ files.
+       Mostly, the driver and firmware compressed packages can be extracted with 7-Zip.
 
 6) Surf to https://armoury-crate.com/, and download the Armoury Crate SE installer.
    Place it under the ASUS folder. You will need this on the Ally/Ally X machine!
@@ -98,7 +100,7 @@ On the Windows Prep machine:
 
 
 -- From here, we normally don't need our Windows Prep Workstation anymore.
--- Everything from here on, happens now on the Ally/Ally X handheld.
+-- Everything from here on, happens now on the Ally/Ally X handheld device.
 
 
 On the Ally/Ally X handheld:
