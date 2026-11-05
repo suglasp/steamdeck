@@ -11,7 +11,10 @@ Note : The procedure will work for Legion Go devices.
 
 Note : We will refer in this guide to "Ally/Ally X", meaning any of the available Asus ROG Ally handheld series.
 
-
+Note : The original Ally (RC71L) and Ally X (RC72LA) can be partly patched using fwupdmgr.
+       Newer hardware versions (The Xbox series) are not supported as of writing.
+       But even then, not all firmwares can be applied, you still need to procedure below if you are on Linux.
+	   
 
 Before we start, we need a few items at hand:
 - Ally/Ally X handheld + 65w poweradapter for our handheld.
