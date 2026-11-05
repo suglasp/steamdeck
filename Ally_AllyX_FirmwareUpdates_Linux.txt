@@ -99,10 +99,11 @@ On the Windows Prep machine:
    It's the 'Windows on the Go' installation you see there, ready to boot on the Ally handheld.
 
 9) Only if you are experienced IT guy/gal, you can inject the Windows drivers. Otherwise, skip this step.
+   Note : I've noticed just injecting all drivers, won't make the Xbox Ally/Xbox Ally X/Xbox Ally X20 boot.
    First, extract all the downloaded driver packages (see step 5).
    Move them in one folder. Check the Windows to Go drive letter on the prep machine, lets say it's E:\.
-   Start Powershell in Elevated mode.
-   Add-WindowsDriver -Path E:\ -Driver D:\AsusDrivers -Recurse   # Add-WindowsDriver -Path <driver_letter_win2go> -Driver <path_to_ally_drivers> -Recurse
+   Start Powershell in Elevated mode, run the following cmd:
+   C:\> Add-WindowsDriver -Path E:\ -Driver D:\AsusDrivers -Recurse   # Add-WindowsDriver -Path <driver_letter_win2go> -Driver <path_to_ally_drivers> -Recurse
 
 
 -- From here, we normally don't need our Windows Prep Workstation anymore.
