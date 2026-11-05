@@ -93,10 +93,16 @@ On the Windows Prep machine:
    It's okay. We just need it to patch our firmware of the handheld device.
    Next time you need to go through all this, you will have to restart from step 1).
    
-8) In Windows Explorer, you will see the USB stick as a drive.
+8) In Windows Explorer, you will see the USB stick as a drive (-letter).
    Copy the ASUS folder we prepped, to the USB stick.
    You will see many folders and files under neat it and already in place, do not touch these.
    It's the 'Windows on the Go' installation you see there, ready to boot on the Ally handheld.
+
+9) Only if you are experienced IT guy/gal, you can inject the Windows drivers. Otherwise, skip this step.
+   First, extract all the downloaded driver packages (see step 5).
+   Move them in one folder. Check the Windows to Go drive letter on the prep machine, lets say it's E:\.
+   Start Powershell in Elevated mode.
+   Add-WindowsDriver -Path E:\ -Driver D:\AsusDrivers -Recurse   # Add-WindowsDriver -Path <driver_letter_win2go> -Driver <path_to_ally_drivers> -Recurse
 
 
 -- From here, we normally don't need our Windows Prep Workstation anymore.
@@ -104,17 +110,17 @@ On the Windows Prep machine:
 
 
 On the Ally/Ally X handheld:
-9) Power down the Ally/Ally X handheld.
-   Make sure it's 60% or more charged.
-   Plugin the USB stick (using adapter if needed).
-   Note :: DO NOT REMOVE THE USB STICK, UNLESS THE ALLY/ALLY X IS POWER OFF! USE THE 2ND USB PORT ON THE ALLY FOR FURTHER ACTIONS.
-   Boot the Ally/Ally X, and press several times 'Volume-'.
-   You will enter the BIOS of the Ally/Ally X.
-   Press the Armoury crate button, that shows a boot selection screen. Select the USB Stick. (**)
+10) Power down the Ally/Ally X handheld.
+    Make sure it's 60% or more charged.
+    Plugin the USB stick (using adapter if needed).
+    Note :: DO NOT REMOVE THE USB STICK, UNLESS THE ALLY/ALLY X IS POWER OFF! USE THE 2ND USB PORT ON THE ALLY FOR FURTHER ACTIONS.
+    Boot the Ally/Ally X, and press several times 'Volume-'.
+    You will enter the BIOS of the Ally/Ally X.
+    Press the Armoury crate button, that shows a boot selection screen. Select the USB Stick. (***)
    
-   (**) If you don't see the USB stick, make sure it's plugged in correctly and retry step 9)
+    (***) If you don't see the USB stick, make sure it's plugged in correctly and retry step 9)
 
-10) If all works well, Windows should be booting now from the USB Stick!
+11) If all works well, Windows should be booting now from the USB Stick!
     Any change you make, will be written to the USB stick. If you reboot the Windows installation, it will remember all changes!
 	Windows 11 25H2 or higher, auto recognizes the Touch screen for basic operations.
 	Windows will the first time ask for Wifi. Click "Driver" > browse to the ASUS folder > 'drivers' > 'Wifi' and select the WLAN folder.
@@ -137,7 +143,7 @@ On the Ally/Ally X handheld:
 	If during a reboot; the Ally/Ally X sits waiting on a black screen + Fan's spinning + USB stick is not flashing anymore (no reads/writes),
     you can power it off by long pressing the power button.
 	
-11) If Windows asks to reset password, connect the USB-C keyboard and reset password (Disconnect power adapter if needed. Keep the USB Stick connected on the Ally/Ally X!).
+12) If Windows asks to reset password, connect the USB-C keyboard and reset password (Disconnect power adapter if needed. Keep the USB Stick connected on the Ally/Ally X!).
     Click Windows start menu > Settings > Windows Update. Let it patch Windows. If a reboot is needed, repeat!
 	Windows Update process, will also patch the firmware for the AMD Chipset and optionally the CPU Microcode!
 	
@@ -148,7 +154,7 @@ On the Ally/Ally X handheld:
     After this :: Poweroff. Unplug the USB Stick.
     Boot into Bazzite/SteamOS like you used to do.
 	
-12) This step is optional, and is more for the "Advanced" users.
+13) This step is optional, and is more for the "Advanced" users.
 
     Warning :: This step can brick your handheld f done wrongly!
                Armoury Crate can patch the BIOS for you.
